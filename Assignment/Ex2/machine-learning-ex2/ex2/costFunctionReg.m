@@ -24,4 +24,20 @@ grad = zeros(size(theta));
 
 % =============================================================
 
+h = sigmoid(X * theta);
+fprintf (" h ", h);
+
+theta = theta( 2: size(theta,1),1);
+
+
+intermediate1 =   -1/m * (y' * log(h)  + (1-y)'*log(1-h))  ;
+intermediate2 = lambda /(2 * m) * sum(theta .^ 2);
+J = intermediate1 + intermediate2;
+
+
+grad (1,1) = 1/m * (X(:,1)' * (h-y));
+X=X(:,2:size(X,2));
+grad(2:size(grad,1),1)= (1/m * X' * (h-y)) + (lambda/m * theta)
+
+
 end
